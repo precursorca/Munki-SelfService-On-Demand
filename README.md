@@ -1,4 +1,11 @@
 # Munki-SelfService-On-Demand
+
+v.1.0.0 
+March 6, 2016
+Alex Narvey / Precursor.ca
+
+Here is a set of utilities that take advantage of Munki’s On Demand nopkg script delivery capability which can be run over and over since they do not actually “Install”.
+
 No warrantee is offered. Neither express nor implied. Use at your own risk.
 
 To use them:
