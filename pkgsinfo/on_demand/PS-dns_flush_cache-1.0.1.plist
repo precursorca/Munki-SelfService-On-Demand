@@ -34,7 +34,7 @@
 	<key>installer_type</key>
 	<string>nopkg</string>
 	<key>minimum_os_version</key>
-	<string>10.10.4</string>
+	<string>10.9.5</string>
 	<key>name</key>
 	<string>ps-dns_flush_cache</string>
 	<key>preinstall_alert</key>
@@ -49,9 +49,32 @@
 		<string>OK</string>
 	</dict>
 	<key>preinstall_script</key>
-	<string>#!/bin/sh
-sudo killall -HUP mDNSResponder</string>
+	<string>#!/bin/bash
+# Define variable(s)
+os=$(/usr/bin/sw_vers -productVersion)
+
+#Test OS version and use the required flushstring
+if [[ $os = 10.10.0 ]]; then
+     flushstring="discoveryutil udnsflushcaches"
+     else
+  if [[ $os = 10.10.1 ]]; then
+ 	flushstring="discoveryutil udnsflushcaches"
+     else
+  if [[ $os = 10.10.2 ]]; then
+ 	flushstring="discoveryutil udnsflushcaches"
+     else
+  if [[ $os = 10.10.3 ]]; then
+ 	flushstring="discoveryutil udnsflushcaches"
+  else
+  flushstring="killall -HUP mDNSResponder"
+  fi
+  fi
+  fi
+fi
+
+#Do it
+sudo $flushstring</string>
 	<key>version</key>
-	<string>1.0</string>
+	<string>1.0.1</string>
 </dict>
 </plist>

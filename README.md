@@ -1,7 +1,7 @@
 # Munki-SelfService-On-Demand
 
-v.1.0.0 
-March 6, 2016
+v.1.0.1 
+March 7, 2016
 Alex Narvey / Precursor.ca
 
 Here is a set of utilities that take advantage of Munki’s On Demand nopkg script delivery capability which can be run over and over since they do not actually “Install”.
@@ -62,6 +62,8 @@ PS-user_font_cache
 Deletes the active users font cache.
 10.9.5 or higher.
 
+March 6, 2016 Version 1.0 
+March 7, 2016 Version 1.0.1 Added logic to the DNS Flush Cache to handle 10.9.5 and up by dealing with the special cases of 10.0.0-10.0.3.
 
 —
 Alex Narvey
