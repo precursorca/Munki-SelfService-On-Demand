@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>OnDemand</key>
+	<true/>
+	<key>_metadata</key>
+	<dict>
+		<key>created_by</key>
+		<string>pi</string>
+		<key>creation_date</key>
+		<date>2016-03-02T15:51:19Z</date>
+		<key>munki_version</key>
+		<string>2.5.1.2627</string>
+		<key>os_version</key>
+		<string>10.11.3</string>
+	</dict>
+	<key>autoremove</key>
+	<false/>
+	<key>catalogs</key>
+	<array>
+		<string>testing</string>
+	</array>
+	<key>category</key>
+	<string>SelfService</string>
+	<key>description</key>
+	<string>This utility will help you share your iPhone/iPad screen with your I.T. support staff. To use it, first connect your iOS device to your computer with its charging cable. Then click OK and we'll do the rest. Otherwise, click Cancel to exit.</string>
+	<key>developer</key>
+	<string>Precursor</string>
+	<key>display_name</key>
+	<string>PS iOS Screen Share</string>
+	<key>icon_name</key>
+	<string>PS-iPhone.png</string>
+	<key>installer_type</key>
+	<string>nopkg</string>
+	<key>minimum_os_version</key>
+	<string>10.10.5</string>
+	<key>name</key>
+	<string>ps-iOS-screen-share</string>
+	<key>preinstall_alert</key>
+	<dict>
+		<key>alert_detail</key>
+		<string>Connect your iOS device to your computer with its charging cable. Then click OK to share its screen. Otherwise, click Cancel to exit.</string>
+		<key>alert_title</key>
+		<string>iPhone Screen Sharing</string>
+		<key>cancel_label</key>
+		<string>Cancel</string>
+		<key>ok_label</key>
+		<string>OK</string>
+	</dict>
+	<key>preinstall_script</key>
+	<string>#!/bin/bash
+/usr/bin/osascript -e 'tell application "QuickTime Player" to activate' -e 'tell application "QuickTime Player" to start (new movie recording)' # -e 'tell application "QuickTime Player" to set current camera of movie to item 2 of "QuickTime Player"'</string>
+	<key>version</key>
+	<string>1.0</string>
+</dict>
+</plist>

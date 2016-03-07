@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>OnDemand</key>
+	<true/>
+	<key>_metadata</key>
+	<dict>
+		<key>created_by</key>
+		<string>precursor.ca</string>
+		<key>creation_date</key>
+		<date>2016-03-02T15:51:19Z</date>
+		<key>munki_version</key>
+		<string>2.5.1.2627</string>
+		<key>os_version</key>
+		<string>10.11.3</string>
+	</dict>
+	<key>autoremove</key>
+	<false/>
+	<key>catalogs</key>
+	<array>
+		<string>testing</string>
+	</array>
+	<key>category</key>
+	<string>SelfService</string>
+	<key>description</key>
+	<string>This utility will optimize your Apple Mail app's sqlite3 envelope database to help Mail operate more efficiently. It is based on the bash script by Paul Galow https://github.com/pbihq/tools which inspired by Brett Terpstra's post http://brettterpstra.com/2015/10/27/vacuuming-mail-dot-app-on-el-capitan/</string>
+	<key>developer</key>
+	<string>Precursor Systems</string>
+	<key>display_name</key>
+	<string>PS Mail Optimizer</string>
+	<key>icon_name</key>
+	<string>PS-mail_optimize.png</string>
+	<key>installer_type</key>
+	<string>nopkg</string>
+	<key>minimum_os_version</key>
+	<string>10.9.5</string>
+	<key>name</key>
+	<string>ps-mail_optimizer</string>
+	<key>preinstall_alert</key>
+	<dict>
+		<key>alert_detail</key>
+		<string>This will will Quit your Mail app and then optimize its sqlite3 envelope database . Click "OK" to continue, or click "Cancel" to exit.</string>
+		<key>alert_title</key>
+		<string>Mail Optimizer</string>
+		<key>cancel_label</key>
+		<string>Cancel</string>
+		<key>ok_label</key>
+		<string>OK</string>
+	</dict>
+	<key>preinstall_script</key>
+	<string>#!/bin/bash
+
+# Apple Mail database defragmentation / optimisation script
+# Based on the Bash Script of Paul Galow https://github.com/pbihq/tools
+# Which was based on the AppleScript by Brett Terpstra http://brettterpstra.com/2015/10/27/vacuuming-mail-dot-app-on-el-capitan/
+# Start script
+clear
+echo "Apple Mail Database optimisation started..."
+
+# Define variable(s)
+os=$(sw_vers -productVersion)
+
+# Close Apple Mail
+AppRunning=$(pgrep Mail)
+if [[ -n $AppRunning ]]; then
+    osascript -e 'quit app "Mail"'
+fi
+
+# Check for OS X version
+if [[ $os = 10.11.* ]]; then
+	mailversion="V3"
+else
+	mailversion="V2"
+fi
+
+#Get User Name
+userName=$(stat -f "%Su" /dev/console)
+
+
+# Calculate database size before starting optimisation
+sizebefore=$(ls -lnah /Users/$userName/Library/Mail/$mailversion/MailData | grep -E 'Envelope Index$' | awk {'print $5'})B
+
+# Run database optimisation (SQL vaccuming)
+/usr/bin/sqlite3 /Users/$userName/Library/Mail/$mailversion/MailData/Envelope\ Index vacuum &amp;&gt; /private/tmp/MailDatabaseOptimisation.log
+error=$(cat /private/tmp/MailDatabaseOptimisation.log)
+
+# Calculate database size after optimisation
+sizeafter=$(ls -lnah /Users/$userName/Library/Mail/$mailversion/MailData | grep -E 'Envelope Index$' | awk {'print $5'})B
+
+# Create success/error message
+if [[ -z $error ]]; then
+	error=0
+	echo "Done."
+else
+	echo $error
+fi
+
+# Show stats
+printf "\nMail index size before:\t%s\nMail index size after:\t%s\n\nEnjoy the new speed!\n\n" "$sizebefore" "$sizeafter"
+
+# Set exit code
+if [[ "$error" -ne "0" ]]; then
+	logger "Apple Mail Database Optimisation failed."
+	exit 1
+else
+	logger "Apple Mail Database Optimisation finished."
+	exit 0
+fi</string>
+	<key>version</key>
+	<string>1.0</string>
+</dict>
+</plist>

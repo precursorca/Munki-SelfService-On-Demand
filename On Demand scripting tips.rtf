@@ -1,0 +1,74 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf340
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fmodern\fcharset0 Courier;\f2\fswiss\fcharset0 ArialMT;
+}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww12280\viewh13480\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs28 \cf0 Munki SelfService (On Demand) Script Tips
+\b0\fs24 \
+\
+
+\fs28 This is just a reminder of what Greg has written on the munki dev forum.\
+\
+
+\b 1) Byline
+\b0 \
+Start the script with a byline on its own line:\
+\pard\pardeftab720\partightenfactor0
+
+\f1 \cf0 \expnd0\expndtw0\kerning0
+#!/bin/bash
+\f2 \
+or \
+
+\f1 #!/bin/sh
+\f2 \
+\
+
+\b 2) References
+\b0 \
+When the script is run from inside the plist you have to be quite literal.\
+\
+Tools need to be referenced in full\
+
+\f1 /usr/bin/osascript
+\f2  instead of 
+\f1 osascript\
+/bin/rm
+\f2  instead of 
+\f1 rm
+\f2 \
+\
+File references can\'92t start with 
+\f1 ~/ 
+\f2 for the Home directory
+\f1 \
+
+\f2 You need the full path:
+\f1  /Users/username/Library/Preferences/..
+\f2 \
+You can tease out the actual active user account name with:\
+\
+
+\f1 #Get User Name\
+userName=$(stat -f "%Su" /dev/console)\
+
+\f2 \
+And then pop it into the reference as a variable like this:\
+
+\f1 /Users/$userName/Library/Preferences/..
+\f2 \
+\
+
+\b 3) Characters
+\b0 \
+If the script is coming from a plist then you want to prevent the XML parser from misinterpreting certain characters. \
+\'93>\'94, \'93<\'93 and \'93&\'94 are all used in XML so you need to spec them in HTML\
+&gt; for >\
+&lt: for <\
+&amp; for &\
+\
+\'97\
+Alex Narvey\
+precursor.ca}
