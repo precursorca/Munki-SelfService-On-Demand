@@ -1,7 +1,7 @@
 # Munki-SelfService-On-Demand
 
-v.1.0.1 
-March 7, 2016
+v.1.0.2 
+March 11, 2016
 Alex Narvey / Precursor.ca
 
 Here is a set of utilities that take advantage of Munki’s On Demand nopkg script delivery capability which can be run over and over since they do not actually “Install”.
@@ -54,6 +54,10 @@ PS-mail_rebuilder
 Deletes the Mail app Envelope and causes Mail to resync with the server and pull down all the messages again. Can take a long time depending on amount of mail and internet speed.
 10.9.5 or higher.
 
+PS-speedtest
+Test your internet speeed (upload and download) using speedtest.cli and pops up the results in a Safari window. Flash is NOT required.
+10.9.5 or higher.
+
 PS-spotlight_rebuilder
 Deletes the Spotlight index (for both internal and external disks). Performance WILL be impacted during the rebuild.
 10.9.5 or higher.
@@ -64,6 +68,7 @@ Deletes the active users font cache.
 
 March 6, 2016 Version 1.0 
 March 7, 2016 Version 1.0.1 Added logic to the DNS Flush Cache to handle 10.9.5 and up by dealing with the special cases of 10.0.0-10.0.3.
+March 11, 2016 Version 1.0.2 Added a Speedteest module and touched up the PS-mail-rebuilder icon.
 
 —
 Alex Narvey
