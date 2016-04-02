@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>OnDemand</key>
+	<true/>
+	<key>_metadata</key>
+	<dict>
+		<key>created_by</key>
+		<string>pi</string>
+		<key>creation_date</key>
+		<date>2016-03-02T15:51:19Z</date>
+		<key>munki_version</key>
+		<string>2.5.1.2627</string>
+		<key>os_version</key>
+		<string>10.11.3</string>
+	</dict>
+	<key>autoremove</key>
+	<false/>
+	<key>catalogs</key>
+	<array>
+		<string>testing</string>
+	</array>
+	<key>category</key>
+	<string>SelfService</string>
+	<key>description</key>
+	<string>This collects the System and Install logs and places an Archive with the username and date/time in the user's Downloads folder.</string>
+	<key>developer</key>
+	<string>Precursor Systems</string>
+	<key>display_name</key>
+	<string>PS Log Collection</string>
+	<key>icon_name</key>
+	<string>PS-log.png</string>
+	<key>installer_type</key>
+	<string>nopkg</string>
+	<key>minimum_os_version</key>
+	<string>10.9.5</string>
+	<key>name</key>
+	<string>ps-log_collect</string>
+	<key>preinstall_alert</key>
+	<dict>
+		<key>alert_detail</key>
+		<string>This will collect your System and Install logs into an Archive and place it in your Downloads folder. Click OK to use start the collection. Otherwise, click Cancel to exit.</string>
+		<key>alert_title</key>
+		<string>Log Collection</string>
+		<key>cancel_label</key>
+		<string>Cancel</string>
+		<key>ok_label</key>
+		<string>OK</string>
+	</dict>
+	<key>preinstall_script</key>
+	<string>#!/bin/bash
+
+# Log Collection script
+# Based on a script of Graham Perrin
+# http://apple.stackexchange.com/questions/94207/is-there-a-user-friendly-app-that-can-create-an-archive-of-system-log-files-and
+
+#Get the user name
+userName=$(stat -f "%Su" /dev/console)
+
+#Get the date/time
+dTime=$(date +"%Y-%m-%d_%H.%M.%S")
+
+#Make the archive and put it in the user's Downloads folder
+sudo /usr/bin/tar -czf /Users/$userName/Downloads/Logs_$(stat -f "%Su" /dev/console)_$dTime.tgz --options='compression-level=9' /private/var/log/*install* /private/var/log/*system*
+sudo /bin/chmod 666 /Users/$userName/Downloads/Logs_$(stat -f "%Su" /dev/console)_$dTime.tgz
+/usr/bin/open /Users/$userName/Downloads/
+</string>
+	<key>version</key>
+	<string>1.0</string>
+</dict>
+</plist>

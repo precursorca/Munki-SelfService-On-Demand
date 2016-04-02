@@ -26,11 +26,11 @@
 	<key>description</key>
 	<string>This utility will help you share your iPhone/iPad screen with your I.T. support staff. To use it, first connect your iOS device to your computer with its charging cable. Then click OK and we'll do the rest. Otherwise, click Cancel to exit.</string>
 	<key>developer</key>
-	<string>Precursor</string>
+	<string>Precursor Systems</string>
 	<key>display_name</key>
 	<string>PS iOS Screen Share</string>
 	<key>icon_name</key>
-	<string>PS-iPhone.png</string>
+	<string>PS-iphone.png</string>
 	<key>installer_type</key>
 	<string>nopkg</string>
 	<key>minimum_os_version</key>
@@ -52,6 +52,6 @@
 	<string>#!/bin/bash
 /usr/bin/osascript -e 'tell application "QuickTime Player" to activate' -e 'tell application "QuickTime Player" to start (new movie recording)' # -e 'tell application "QuickTime Player" to set current camera of movie to item 2 of "QuickTime Player"'</string>
 	<key>version</key>
-	<string>1.0</string>
+	<string>1.0.1</string>
 </dict>
 </plist>
