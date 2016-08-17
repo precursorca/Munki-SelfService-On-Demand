@@ -1,7 +1,7 @@
 # Munki-SelfService-On-Demand
 
-v. 1.0.3
-April 2, 2016
+v. 1.0.4
+August 16, 2016
 Alex Narvey / Precursor.ca
 
 Here is a set of utilities that take advantage of Munki’s On Demand nopkg script delivery capability which can be run over and over since they do not actually “Install”.
@@ -25,6 +25,10 @@ I used Munki Admin for this.
 
 —
 The Utilities
+
+PS-cc_updater
+Initiates an update of all installed Creative Cloud apps so that Standard Users can update their Creative Cloud. Requires that an Admin has already packaged and installed a RemoteUpdateManager enabled version of Creative Cloud Desktop App using the Adobe Creative Cloud Packager.
+10.9.5 or higher
 
 PS-dns_flush_cache
 Flushes the DNS cache on 10.10.4 and higher. 
@@ -72,6 +76,7 @@ March 6, 2016 Version 1.0
 March 7, 2016 Version 1.0.1 Added logic to the DNS Flush Cache to handle 10.9.5 and up by dealing with the special cases of 10.0.0-10.0.3.
 March 11, 2016 Version 1.0.2 Added a Speedteest module and touched up the PS-mail-rebuilder icon.
 April 2, 2016 Version 1.0.3 Added a Log Collection module. Fixed category of PS-iOS_screen_share. Reduced size of all icons to improve performance.
+August 16, 2016 Version 1.0.4 Added an Adobe Creative Cloud updater (for those admins who have packaged and installed a RemoteUpdateManager enabled CC Desktop App).
 
 —
 Alex Narvey

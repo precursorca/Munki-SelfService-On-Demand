@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>OnDemand</key>
+	<true/>
+	<key>_metadata</key>
+	<dict>
+		<key>created_by</key>
+		<string>precursor.ca</string>
+		<key>creation_date</key>
+		<date>2016-08-02T15:51:19Z</date>
+		<key>munki_version</key>
+		<string>2.8</string>
+		<key>os_version</key>
+		<string>10.11.6</string>
+	</dict>
+	<key>autoremove</key>
+	<false/>
+	<key>catalogs</key>
+	<array>
+		<string>testing</string>
+		<string>production</string>
+	</array>
+	<key>category</key>
+	<string>SelfService</string>
+	<key>description</key>
+	<string>Allows Standard Users without administrator privileges to initiate an update of all installed Creative Cloud apps. Note: The Creative Cloud applications must first be Quit in order to receive an update. Also note: this does not install Creative Cloud apps - for that your must contact your System Administrator.</string>
+	<key>developer</key>
+	<string>Precursor Systems</string>
+	<key>display_name</key>
+	<string>PS CC Updater</string>
+	<key>icon_name</key>
+	<string>PS-cc_updater.png</string>
+	<key>installer_type</key>
+	<string>nopkg</string>
+	<key>minimum_os_version</key>
+	<string>10.9.5</string>
+	<key>name</key>
+	<string>ps-cc_updater</string>
+	<key>preinstall_alert</key>
+	<dict>
+		<key>alert_detail</key>
+		<string>If you have Creative Cloud installed then this will initiate a round of updates to all those apps - PROVIDED THEY HAVE FIRST BEEN QUIT. Note: If you are missing one or more Creative Cloud apps this does not install them. You will have to contact your Systems Administrator for those installations. Click OK to begin the update. Otherwise, click Cancel to exit.</string>
+		<key>alert_title</key>
+		<string>CC Updater</string>
+		<key>cancel_label</key>
+		<string>Cancel</string>
+		<key>ok_label</key>
+		<string>OK</string>
+	</dict>
+	<key>preinstall_script</key>
+	<string>#!/bin/bash
+#Begin updating Adobe Creative Cloud"
+/usr/local/bin/RemoteUpdateManager
+</string>
+	<key>version</key>
+	<string>1.0</string>
+</dict>
+</plist>
