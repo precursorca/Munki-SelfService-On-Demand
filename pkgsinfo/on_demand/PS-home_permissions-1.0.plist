@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>OnDemand</key>
+	<true/>
+	<key>_metadata</key>
+	<dict>
+		<key>created_by</key>
+		<string>precursor.ca</string>
+		<key>creation_date</key>
+		<date>2016-09-03T06:49:51Z</date>
+		<key>munki_version</key>
+		<string>2.8</string>
+		<key>os_version</key>
+		<string>10.11.6</string>
+	</dict>
+	<key>autoremove</key>
+	<false/>
+	<key>catalogs</key>
+	<array>
+		<string>testing</string>
+	</array>
+	<key>category</key>
+	<string>SelfService</string>
+	<key>description</key>
+	<string>This will reset the permissions on the items in the active user's Home Folder. May be helpful where Library items have acquired incorrect permissions and are inaccessible.</string>
+	<key>developer</key>
+	<string>Precursor Systems</string>
+	<key>display_name</key>
+	<string>PS Reset Home Permissions</string>
+	<key>icon_name</key>
+	<string>PS-home_permissions.png</string>
+	<key>installer_type</key>
+	<string>nopkg</string>
+	<key>minimum_os_version</key>
+	<string>10.9.5</string>
+	<key>name</key>
+	<string>ps-home_permissions</string>
+	<key>preinstall_alert</key>
+	<dict>
+		<key>alert_detail</key>
+		<string>Please close all Documents and quit all Applications before using. This will reset the permissions of your Home folder items to what they should be by default. Click OK to begin the update. Otherwise, click Cancel to exit.</string>
+		<key>alert_title</key>
+		<string>Reset Home Permissions</string>
+		<key>cancel_label</key>
+		<string>Cancel</string>
+		<key>ok_label</key>
+		<string>OK</string>
+	</dict>
+	<key>preinstall_script</key>
+	<string>#!/bin/bash
+#Get the UID
+userID=$(/usr/bin/id -u $(/usr/bin/logname))
+#Reset the users Home Folder permissions.
+/usr/sbin/diskutil resetUserPermissions / $userID</string>
+	<key>version</key>
+	<string>1.0</string>
+</dict>
+</plist>
