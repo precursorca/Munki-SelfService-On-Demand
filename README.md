@@ -1,7 +1,7 @@
 # Munki-SelfService-On-Demand
 
-> v. 1.0.5  
-> September 3, 2016  
+> v. 1.0.6  
+> October 7, 2016  
 > Alex Narvey / Precursor.ca  
 
 
@@ -37,7 +37,7 @@ Flushes the DNS cache on 10.10.4 and higher.
 It could work for 10.9.5 too but I did not build in the logic to discern the OS and provide the relevant alternative for 10.0.0 -> 10.0.3. (Maybe in version 2.0)
 
 ### PS-home_permissions
-Resets the user's Home folder permissions as per Apple Tech Note https://support.apple.com/en-ca/HT203538. 
+Resets the permissions of the user's Home folder as per Apple Tech Note: https://support.apple.com/en-ca/HT203538. 
 10.11 or higher
 
 ### PS-hello_world
@@ -84,7 +84,8 @@ Deletes the active users font cache.
 * March 11, 2016 Version 1.0.2 Added a Speedteest module and touched up the PS-mail-rebuilder icon.
 * April 2, 2016 Version 1.0.3 Added a Log Collection module. Fixed category of PS-iOS_screen_share. Reduced size of all icons to improve performance.
 * August 16, 2016 Version 1.0.4 Added an Adobe Creative Cloud updater (for those admins who have packaged and installed a RemoteUpdateManager enabled CC Desktop App).
-* September 3, 2016 Version 1.0.5 Added a module to reset the user's Home folder permissions as per Apple Tech Note https://support.apple.com/en-ca/HT203538.
+* September 3, 2016 Version 1.0.5 Added a module to reset the permissions of the users Home folder.
+* October 6, 2016 Version 1.0.6 Added macOS Sierra compatibility to PS-mail_optimizer and PS-mail_rebuilder.
 
 —
 Alex Narvey

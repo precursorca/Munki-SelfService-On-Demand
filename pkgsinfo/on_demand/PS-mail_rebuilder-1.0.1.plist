@@ -24,23 +24,23 @@
 	<key>category</key>
 	<string>SelfService</string>
 	<key>description</key>
-	<string>This utility will optimize your Apple Mail app's sqlite3 envelope database to help Mail operate more efficiently. It is based on the bash script by Paul Galow https://github.com/pbihq/tools which inspired by Brett Terpstra's post http://brettterpstra.com/2015/10/27/vacuuming-mail-dot-app-on-el-capitan/</string>
+	<string>This utility will rebuild your Apple Mail app's envelope database from scratch. This can take time. Use it when you Mail is missing items or appears to be corrupted. If Mail is just slow you might want to try the PS-Mail_Optimizer instaed.</string>
 	<key>developer</key>
 	<string>Precursor Systems</string>
 	<key>display_name</key>
-	<string>PS Mail Optimizer</string>
+	<string>PS Mail Rebuilder</string>
 	<key>icon_name</key>
-	<string>PS-mail_optimize.png</string>
+	<string>PS-mail_rebuild.png</string>
 	<key>installer_type</key>
 	<string>nopkg</string>
 	<key>minimum_os_version</key>
 	<string>10.9.5</string>
 	<key>name</key>
-	<string>ps-mail_optimizer</string>
+	<string>ps-mail_rebuilder</string>
 	<key>preinstall_alert</key>
 	<dict>
 		<key>alert_detail</key>
-		<string>This will will Quit your Mail app and then optimize its sqlite3 envelope database . Click "OK" to continue, or click "Cancel" to exit.</string>
+		<string>This will will Quit your Mail app and then rebuild your Apple Mail app's envelope database from scratch. Click "OK" to continue, or click "Cancel" to exit.</string>
 		<key>alert_title</key>
 		<string>Mail Optimizer</string>
 		<key>cancel_label</key>
@@ -51,12 +51,12 @@
 	<key>preinstall_script</key>
 	<string>#!/bin/bash
 
-# Apple Mail database defragmentation / optimisation script
-# Based on the Bash Script of Paul Galow https://github.com/pbihq/tools
+# Apple Mail envelope rebuilding script
+# Parts based on the Bash Script of Paul Galow https://github.com/pbihq/tools
 # Which was based on the AppleScript by Brett Terpstra http://brettterpstra.com/2015/10/27/vacuuming-mail-dot-app-on-el-capitan/
 # Start script
 clear
-echo "Apple Mail Database optimisation started..."
+echo "Apple Mail Database rebuild started..."
 
 # Define variable(s)
 os=$(sw_vers -productVersion)
@@ -67,26 +67,23 @@ if [[ -n $AppRunning ]]; then
     osascript -e 'quit app "Mail"'
 fi
 
-# Check for OS X version
-if [[ $os = 10.11.* ]]; then
+if [[ $os = 10.12* ]]; then
+	mailversion="V4"
+else 
+ if [[ $os = 10.11* ]]; then
 	mailversion="V3"
-else
+ else
 	mailversion="V2"
+ fi
 fi
 
 #Get User Name
 userName=$(stat -f "%Su" /dev/console)
 
-
-# Calculate database size before starting optimisation
-sizebefore=$(ls -lnah /Users/$userName/Library/Mail/$mailversion/MailData | grep -E 'Envelope Index$' | awk {'print $5'})B
-
-# Run database optimisation (SQL vaccuming)
-/usr/bin/sqlite3 /Users/$userName/Library/Mail/$mailversion/MailData/Envelope\ Index vacuum &amp;&gt; /private/tmp/MailDatabaseOptimisation.log
-error=$(cat /private/tmp/MailDatabaseOptimisation.log)
-
-# Calculate database size after optimisation
-sizeafter=$(ls -lnah /Users/$userName/Library/Mail/$mailversion/MailData | grep -E 'Envelope Index$' | awk {'print $5'})B
+# Remove envelope db for resynchronization/rebuilding
+/bin/rm -rf /Users/$userName/Library/Mail/$mailversion/MailData/Envelope\ Index*  &amp;&gt; /private/tmp/MailRebuilding.log
+/bin/rm -rf /Users/$userName/Library/Mail/$mailversion/MailData/ExternalUpdates.storedata* &amp;&gt; /private/tmp/MailRebuilding.log
+error=$(cat /private/tmp/MailRebuilding.log)
 
 # Create success/error message
 if [[ -z $error ]]; then
@@ -96,15 +93,12 @@ else
 	echo $error
 fi
 
-# Show stats
-printf "\nMail index size before:\t%s\nMail index size after:\t%s\n\nEnjoy the new speed!\n\n" "$sizebefore" "$sizeafter"
-
 # Set exit code
 if [[ "$error" -ne "0" ]]; then
-	logger "Apple Mail Database Optimisation failed."
+	logger "Apple Mail Database Rebuild failed."
 	exit 1
 else
-	logger "Apple Mail Database Optimisation finished."
+	logger "Apple Mail Database Rebuild finished."
 	exit 0
 fi</string>
 	<key>version</key>
