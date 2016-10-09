@@ -51,10 +51,29 @@
 	</dict>
 	<key>preinstall_script</key>
 	<string>#!/bin/bash
-#Begin updating Adobe Creative Cloud"
+# Begin updating Adobe Creative Cloud
+
+# killing all Adobe Apps (contributed by Oliver Hetzner)
+adobepid=$(/usr/bin/pgrep Adobe)
+bin/kill -9 $adobepid
+
+#running the manager
 /usr/local/bin/RemoteUpdateManager
-</string>
+
+# giving the User a dialog that we are ready now. (contributed by Oliver Hetzner)
+/usr/bin/osascript&lt;&lt;END
+
+tell application "Finder"
+activate
+
+display dialog "Adobe CC updates completed" buttons "OK" default button 1 giving up after 30
+
+end tell
+END
+
+# importent to set the exit status to 0 (contributed by Oliver Hetzner)
+exit 0</string>
 	<key>version</key>
-	<string>1.0</string>
+	<string>1.0.1</string>
 </dict>
 </plist>

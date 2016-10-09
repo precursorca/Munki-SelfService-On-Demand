@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>OnDemand</key>
+	<true/>
+	<key>_metadata</key>
+	<dict>
+		<key>created_by</key>
+		<string>precursor.ca</string>
+		<key>creation_date</key>
+		<date>2016-10-09T16:05:42Z</date>
+		<key>munki_version</key>
+		<string>2.8</string>
+		<key>os_version</key>
+		<string>10.11.6</string>
+	</dict>
+	<key>autoremove</key>
+	<false/>
+	<key>catalogs</key>
+	<array>
+		<string>testing</string>
+	</array>
+	<key>category</key>
+	<string>SelfService</string>
+	<key>description</key>
+	<string>This will force the Trash to empty (on all mounted volumes) getting rid of pesky locked and "in-use" files.</string>
+	<key>developer</key>
+	<string>Precursor Systems</string>
+	<key>display_name</key>
+	<string>PS Force Empty Trash</string>
+	<key>icon_name</key>
+	<string>PS-empty_trash.png</string>
+	<key>installer_type</key>
+	<string>nopkg</string>
+	<key>minimum_os_version</key>
+	<string>10.9.5</string>
+	<key>name</key>
+	<string>ps-force_empty_trash</string>
+	<key>preinstall_alert</key>
+	<dict>
+		<key>alert_detail</key>
+		<string>This will force the Trash to empty, removing locked and "in-use" files in the Trash of all mounted volumes. Click OK to begin. Otherwise, click Cancel to exit.</string>
+		<key>alert_title</key>
+		<string>Force Empty Trash</string>
+		<key>cancel_label</key>
+		<string>Cancel</string>
+		<key>ok_label</key>
+		<string>OK</string>
+	</dict>
+	<key>preinstall_script</key>
+	<string>#!/bin/bash
+# Set the Variables
+USERLOC="/Users"
+THEUSER=$(who | awk 'NR==1 {print $1}' )
+USERPATH="${USERLOC}/${THEUSER}"
+TRASHPATH="${USERPATH}/.Trash"
+#Force the Trash of all mounted volumes to empty
+/bin/rm -rf $TRASHPATH /Volumes/*/.Trashes
+</string>
+	<key>version</key>
+	<string>1.0</string>
+</dict>
+</plist>

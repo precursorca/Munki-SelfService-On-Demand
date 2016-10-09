@@ -1,7 +1,7 @@
 # Munki-SelfService-On-Demand
 
-> v. 1.0.6  
-> October 7, 2016  
+> v. 1.0.7  
+> October 9, 2016  
 > Alex Narvey / Precursor.ca  
 
 
@@ -36,6 +36,14 @@ Flushes the DNS cache on 10.10.4 and higher.
 10.10.4 or higher
 It could work for 10.9.5 too but I did not build in the logic to discern the OS and provide the relevant alternative for 10.0.0 -> 10.0.3. (Maybe in version 2.0)
 
+### PS-eject_cd_dvd
+Ejects the media from the optical drive for older Macs and Macs with USB SuperDrives. For those times when the digital eject button is just not working.
+10.9.5 or higher
+
+### PS-force_empty_trash
+Forces the Trash on all mounted volumes to empty, purging locked and "in use" files that standard users normally can't get rid of.
+10.9.5 or higher
+
 ### PS-home_permissions
 Resets the permissions of the user's Home folder as per Apple Tech Note: https://support.apple.com/en-ca/HT203538. 
 10.11 or higher
@@ -51,6 +59,14 @@ It does not seem possible at this time to use command line to choose the iPhone/
 
 ### PS-launch_services
 Resets launch services to help with problems in window display and open with performance.
+10.9.5 or higher.
+
+### PS-library_invisible
+Makes the ~/Library invisibile again - if a user has made it visible and wants to return it to its natural state.
+10.9.5 or higher.
+
+### PS-library_visible
+Makes the normally invisible ~/Library folder visible and opens it in the Finder.
 10.9.5 or higher.
 
 ### PS-log_collect
@@ -86,6 +102,11 @@ Deletes the active users font cache.
 * August 16, 2016 Version 1.0.4 Added an Adobe Creative Cloud updater (for those admins who have packaged and installed a RemoteUpdateManager enabled CC Desktop App).
 * September 3, 2016 Version 1.0.5 Added a module to reset the permissions of the users Home folder.
 * October 6, 2016 Version 1.0.6 Added macOS Sierra compatibility to PS-mail_optimizer and PS-mail_rebuilder.
+* October 9, 2016 Version 1.0.7 Added Oliver Hetzner's AppleScript and other mods to PS-cc_udpater. Added PS-force_empty_trash, PS-library_visible, PS-library_invisible, and PS-eject_cd_dvd. Edited comments in PS-mail_optimizer and PS-mail_rebuilder
+
+## Contributors
+* Alex Narvey
+* Oliver Hertzner
 
 —
 Alex Narvey
