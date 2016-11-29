@@ -1,7 +1,7 @@
 # Munki-SelfService-On-Demand
 
-> v. 1.0.7  
-> October 9, 2016  
+> v. 1.0.8  
+> November 29, 2016  
 > Alex Narvey / Precursor.ca  
 
 
@@ -29,6 +29,11 @@ I used Munki Admin for this.
 
 ### PS-cc_updater
 Initiates an update of all installed Creative Cloud apps so that Standard Users can update their Creative Cloud. Requires that an Admin has already packaged and installed a RemoteUpdateManager enabled version of Creative Cloud Desktop App using the Adobe Creative Cloud Packager.
+10.9.5 or higher
+
+### PS-clean_var_folders
+his utility will clear the contents of the folder /private/var/folders which caches various things that may become corrupt and - among other things - prevent an app from launching. 
+This is “big medecine” and should only be undertaken under the advisement of your system adminstrator. After performing this function you should then choose "Restart" from the Apple menu to start up the computer. It will automatically rebuild anything it needs in /private/var/folders.
 10.9.5 or higher
 
 ### PS-dns_flush_cache
@@ -103,6 +108,7 @@ Deletes the active users font cache.
 * September 3, 2016 Version 1.0.5 Added a module to reset the permissions of the users Home folder.
 * October 6, 2016 Version 1.0.6 Added macOS Sierra compatibility to PS-mail_optimizer and PS-mail_rebuilder.
 * October 9, 2016 Version 1.0.7 Added Oliver Hetzner's AppleScript and other mods to PS-cc_udpater. Added PS-force_empty_trash, PS-library_visible, PS-library_invisible, and PS-eject_cd_dvd. Edited comments in PS-mail_optimizer and PS-mail_rebuilder
+* November 29, 2016 Version 1.0.8 Added PS-clean_var_folders to clean up corrupted cache files that may prevent apps from launching - among other things.
 
 ## Contributors
 * Alex Narvey
