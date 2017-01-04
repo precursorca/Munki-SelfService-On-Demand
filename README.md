@@ -1,7 +1,7 @@
 # Munki-SelfService-On-Demand
 
-> v. 1.0.8  
-> November 29, 2016  
+> v. 1.0.9  
+> January 4, 2017  
 > Alex Narvey / Precursor.ca  
 
 
@@ -32,7 +32,7 @@ Initiates an update of all installed Creative Cloud apps so that Standard Users 
 10.9.5 or higher
 
 ### PS-clean_var_folders
-his utility will clear the contents of the folder /private/var/folders which caches various things that may become corrupt and - among other things - prevent an app from launching. 
+This utility will clear the contents of the folder /private/var/folders which caches various things that may become corrupt and - among other things - prevent an app from launching. 
 This is “big medecine” and should only be undertaken under the advisement of your system adminstrator. After performing this function you should then choose "Restart" from the Apple menu to start up the computer. It will automatically rebuild anything it needs in /private/var/folders.
 10.9.5 or higher
 
@@ -86,6 +86,10 @@ Vacuums the Mail app database to make it more efficient.
 Deletes the Mail app Envelope and causes Mail to resync with the server and pull down all the messages again. Can take a long time depending on amount of mail and internet speed.
 10.9.5 or higher.
 
+### PS-purge
+Runs the "purge" command to free up memory without requiring a restart. It may aid in performance. Modern versions of macOS are quite good at managing memory on their own so this command may only result in the cached files being cleaned out.
+10.9.5 or higher.
+
 ### PS-speedtest
 Test your internet speeed (upload and download) using speedtest.cli and pops up the results in a Safari window. Flash is NOT required.
 10.9.5 or higher.
@@ -96,6 +100,10 @@ Deletes the Spotlight index (for both internal and external disks). Performance 
 
 ### PS-user_font_cache
 Deletes the active users font cache.
+10.9.5 or higher.
+
+### PS-view_console_as_admin
+Lets a standard user view the System log with the /Applications/Utilities/Console app.
 10.9.5 or higher.
 
 ## Updates
@@ -109,6 +117,7 @@ Deletes the active users font cache.
 * October 6, 2016 Version 1.0.6 Added macOS Sierra compatibility to PS-mail_optimizer and PS-mail_rebuilder.
 * October 9, 2016 Version 1.0.7 Added Oliver Hetzner's AppleScript and other mods to PS-cc_udpater. Added PS-force_empty_trash, PS-library_visible, PS-library_invisible, and PS-eject_cd_dvd. Edited comments in PS-mail_optimizer and PS-mail_rebuilder
 * November 29, 2016 Version 1.0.8 Added PS-clean_var_folders to clean up corrupted cache files that may prevent apps from launching - among other things.
+* January 4, 2017 Version 1.0.9 Added PS-purge and PS-view_console_as_admin. Updated PS-clean_var_folders to attempt to remove contents of zz folder.
 
 ## Contributors
 * Alex Narvey

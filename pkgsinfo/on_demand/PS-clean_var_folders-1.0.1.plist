@@ -42,7 +42,7 @@
 		<key>alert_detail</key>
 		<string>This utility will clear the contents of the folder /private/var/folders which caches various things that may become corrupt and - among other things - prevent an app from launching. This is “big medecine” and should only be undertaken under the advisement of your system adminstrator. After performing this function you should then choose "Restart" from the Apple menu to start up the computer. It will automatically rebuild anything it needs in /private/var/folders. Click "OK" to continue, or click "Cancel" to exit.</string>
 		<key>alert_title</key>
-		<string>First_Aid</string>
+		<string>Clean Var Folders</string>
 		<key>cancel_label</key>
 		<string>Cancel</string>
 		<key>ok_label</key>
@@ -52,8 +52,9 @@
 	<string>#!/bin/bash
 #delete folder in /private/var/folders but leave the parent directory untouched.
 rm -rfv /private/var/folders/*
+rm -rfv /private/var/folders/zz/*
 exit 0</string>
 	<key>version</key>
-	<string>1.0</string>
+	<string>1.0.2</string>
 </dict>
 </plist>

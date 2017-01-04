@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>OnDemand</key>
+	<true/>
+	<key>_metadata</key>
+	<dict>
+		<key>created_by</key>
+		<string>tott.precursor.ca</string>
+	</dict>
+	<key>autoremove</key>
+	<false/>
+	<key>catalogs</key>
+	<array>
+		<string>testing</string>
+	</array>
+	<key>category</key>
+	<string>SelfService</string>
+	<key>description</key>
+	<string>Let a standard user view the System Log in Console.app</string>
+	<key>developer</key>
+	<string>Precursor Systems</string>
+	<key>display_name</key>
+	<string>PS View Console As Admin</string>
+	<key>icon_name</key>
+	<string>ps-view_console_as_admin.png</string>
+	<key>installer_type</key>
+	<string>nopkg</string>
+	<key>minimum_os_version</key>
+	<string>10.9.5</string>
+	<key>name</key>
+	<string>ps-view_console_as_admin</string>
+	<key>preinstall_alert</key>
+	<dict>
+		<key>alert_detail</key>
+		<string>Let a standard user view the System Log in Console.app. 
+
+NB. Managed Software Centre will complete will you Quit the Console app. 
+
+Click OK to continue, or click Cancel to exit.</string>
+		<key>alert_title</key>
+		<string>PS View Console As Admin</string>
+		<key>cancel_label</key>
+		<string>Cancel</string>
+		<key>ok_label</key>
+		<string>OK</string>
+	</dict>
+	<key>preinstall_script</key>
+	<string>#!/bin/bash
+/Applications/Utilities/Console.app/Contents/MacOS/Console</string>
+	<key>version</key>
+	<string>1.0</string>
+</dict>
+</plist>
