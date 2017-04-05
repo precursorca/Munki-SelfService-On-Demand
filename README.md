@@ -1,7 +1,7 @@
 # Munki-SelfService-On-Demand
 
-> v. 1.0.9  
-> January 4, 2017  
+> v. 1.0.10  
+> April 5, 2017  
 > Alex Narvey / Precursor.ca  
 
 
@@ -47,6 +47,11 @@ Ejects the media from the optical drive for older Macs and Macs with USB SuperDr
 
 ### PS-force_empty_trash
 Forces the Trash on all mounted volumes to empty, purging locked and "in use" files that standard users normally can't get rid of.
+10.9.5 or higher
+
+### PS-enable_ard
+Enables Apple Remote Desktop client for all users. (a more complete script with the ability to enable for specific users only is discussed at:
+http://scriptingosx.com/2016/01/control-apple-remote-desktop-access-with-munki/.
 10.9.5 or higher
 
 ### PS-home_permissions
@@ -118,6 +123,7 @@ Lets a standard user view the System log with the /Applications/Utilities/Consol
 * October 9, 2016 Version 1.0.7 Added Oliver Hetzner's AppleScript and other mods to PS-cc_udpater. Added PS-force_empty_trash, PS-library_visible, PS-library_invisible, and PS-eject_cd_dvd. Edited comments in PS-mail_optimizer and PS-mail_rebuilder
 * November 29, 2016 Version 1.0.8 Added PS-clean_var_folders to clean up corrupted cache files that may prevent apps from launching - among other things.
 * January 4, 2017 Version 1.0.9 Added PS-purge and PS-view_console_as_admin. Updated PS-clean_var_folders to attempt to remove contents of zz folder.
+* April 5, 2017 Version 1.0.10 Added PS-enable_ard to enable the Apple Remote Desktop client (more info at http://scriptingosx.com/2016/01/control-apple-remote-desktop-access-with-munki/).
 
 ## Contributors
 * Alex Narvey

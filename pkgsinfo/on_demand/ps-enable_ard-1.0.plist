@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>OnDemand</key>
+	<true/>
+	<key>_metadata</key>
+	<dict>
+		<key>created_by</key>
+		<string></string>
+		<key>creation_date</key>
+		<date>2017-03-15T20:19:08Z</date>
+		<key>munki_version</key>
+		<string>2.9.2</string>
+		<key>os_version</key>
+		<string>10.12.3</string>
+	</dict>
+	<key>autoremove</key>
+	<false/>
+	<key>catalogs</key>
+	<array>
+		<string>testing</string>
+		<string>production</string>
+	</array>
+	<key>category</key>
+	<string>SelfService</string>
+	<key>description</key>
+	<string>This utility witll enable the Apple Remote Desktop client for all users.</string>
+	<key>developer</key>
+	<string>Precursor Systems</string>
+	<key>display_name</key>
+	<string>PS Enable ARD</string>
+	<key>installer_type</key>
+	<string>nopkg</string>
+	<key>minimum_os_version</key>
+	<string>10.4.0</string>
+	<key>name</key>
+	<string>ps-enable_ard</string>
+	<key>preinstall_alert</key>
+	<dict>
+		<key>alert_detail</key>
+		<string>This utility will enable the Apple Remote Desktop client for all users. Click OK to begin the update. Otherwise, click Cancel to exit.</string>
+		<key>alert_title</key>
+		<string>Enable ARD</string>
+	</dict>
+	<key>preinstall_script</key>
+	<string>#!/bin/sh
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki export PATH
+# use kickstart to enable full Remote Desktop access
+# for more info, see: https://support.apple.com/HT201710
+# a more complete script with enablement of only specified users is avaiable at:
+# http://scriptingosx.com/2016/01/control-apple-remote-desktop-access-with-munki/
+kickstart="/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart"
+#enable ARD access
+$kickstart -activate -configure -allowAccessFor -allUsers -privs -all
+exit 0</string>
+	<key>unattended_install</key>
+	<true/>
+	<key>unattended_uninstall</key>
+	<true/>
+	<key>uninstallable</key>
+	<true/>
+	<key>version</key>
+	<string>1.0</string>
+</dict>
+</plist>
