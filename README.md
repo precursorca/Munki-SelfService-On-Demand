@@ -1,7 +1,7 @@
 # Munki-SelfService-On-Demand
 
-> v. 1.0.10  
-> April 5, 2017  
+> v. 1.0.11  
+> October 16, 2017  
 > Alex Narvey / Precursor.ca  
 
 
@@ -91,6 +91,10 @@ Vacuums the Mail app database to make it more efficient.
 Deletes the Mail app Envelope and causes Mail to resync with the server and pull down all the messages again. Can take a long time depending on amount of mail and internet speed.
 10.9.5 or higher.
 
+### PS-malware_scan
+Initiates a malware scan utilizing Malwarebytes for Mac 3.0 or higher provided it is properly installed and access privileges are granted - see included document "Munki and osascript Notes"
+10.12.6 or higher.
+
 ### PS-purge
 Runs the "purge" command to free up memory without requiring a restart. It may aid in performance. Modern versions of macOS are quite good at managing memory on their own so this command may only result in the cached files being cleaned out.
 10.9.5 or higher.
@@ -124,6 +128,7 @@ Lets a standard user view the System log with the /Applications/Utilities/Consol
 * November 29, 2016 Version 1.0.8 Added PS-clean_var_folders to clean up corrupted cache files that may prevent apps from launching - among other things.
 * January 4, 2017 Version 1.0.9 Added PS-purge and PS-view_console_as_admin. Updated PS-clean_var_folders to attempt to remove contents of zz folder.
 * April 5, 2017 Version 1.0.10 Added PS-enable_ard to enable the Apple Remote Desktop client (more info at http://scriptingosx.com/2016/01/control-apple-remote-desktop-access-with-munki/).
+* October 16, 2017 Version 1.0.11 Added PS-malware_scan to initiate a Malwarebytes for Mac 3.0 scan. (May require some other manipulations. See included "Munki and osascript Notes").
 
 ## Contributors
 * Alex Narvey
