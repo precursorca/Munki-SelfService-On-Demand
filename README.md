@@ -17,7 +17,7 @@ munki_repo/pkgsinfo
 2) Copy the icons from the icon folder into:
 munki_repo/icons
 3) Run the make catalog command:
-usr/local/munki/makecatalog
+/usr/local/munki/makecatalogs
 
 4) Add the Packages to the “Optional Install” property of the desired Manifest.
 I used Munki Admin for this.
