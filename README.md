@@ -4,7 +4,7 @@
 > February 23, 2020  
 > Alex Narvey / Precursor.ca  
 
-![Self Service Screenshot](SelfServices_Screenshot.png)
+![Self Service Screenshot](SelfServices_ScreenShot.png)
 
 Here is a set of utilities that take advantage of Munki’s On Demand nopkg script delivery capability which can be run over and over since they do not actually “Install”.
 
