@@ -1,7 +1,7 @@
 # Munki-SelfService-On-Demand
 
-> v. 1.0.11  
-> October 16, 2017  
+> v. 1.0.12  
+> February 23, 2020  
 > Alex Narvey / Precursor.ca  
 
 
@@ -107,6 +107,10 @@ Test your internet speeed (upload and download) using speedtest.cli and pops up 
 Deletes the Spotlight index (for both internal and external disks). Performance WILL be impacted during the rebuild.
 10.9.5 or higher.
 
+### PS-startup_chime
+Enable the Startup Chime on T1 and T2 chip Macs from 2016 on.
+10.13.0 or higher.
+
 ### PS-user_font_cache
 Deletes the active users font cache.
 10.9.5 or higher.
@@ -129,6 +133,8 @@ Lets a standard user view the System log with the /Applications/Utilities/Consol
 * January 4, 2017 Version 1.0.9 Added PS-purge and PS-view_console_as_admin. Updated PS-clean_var_folders to attempt to remove contents of zz folder.
 * April 5, 2017 Version 1.0.10 Added PS-enable_ard to enable the Apple Remote Desktop client (more info at http://scriptingosx.com/2016/01/control-apple-remote-desktop-access-with-munki/).
 * October 16, 2017 Version 1.0.11 Added PS-malware_scan to initiate a Malwarebytes for Mac 3.0 scan. (May require some other manipulations. See included "Munki and osascript Notes").
+* February 23, 2020 Version 1.0.12 Added PS-startup_chime to enable the missing Startup Chime on Macs from 2016 on with T1 or T2 chips.
+
 
 ## Contributors
 * Alex Narvey
