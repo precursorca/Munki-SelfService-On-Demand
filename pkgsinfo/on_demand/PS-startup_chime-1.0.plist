@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>OnDemand</key>
+	<true/>
+	<key>_metadata</key>
+	<dict>
+		<key>created_by</key>
+		<string>pi</string>
+		<key>creation_date</key>
+		<date>2020-02-20T15:51:19Z</date>
+		<key>munki_version</key>
+		<string>4.1.0</string>
+		<key>os_version</key>
+		<string>10.13.6</string>
+	</dict>
+	<key>autoremove</key>
+	<false/>
+	<key>catalogs</key>
+	<array>
+		<string>testing</string>
+		<string>production</string>
+	</array>
+	<key>category</key>
+	<string>SelfService</string>
+	<key>description</key>
+	<string>This is an On Demand Munki utility to enable the missing Startup Chime on Macs from 2016-2019 with T1 and T2 chips. After installing, the chime will ring on the next reboot.</string>
+	<key>developer</key>
+	<string>Precursor Systems</string>
+	<key>display_name</key>
+	<string>PS Startup Chime</string>
+	<key>icon_name</key>
+	<string>PS-startup_chime.png</string>
+	<key>installer_type</key>
+	<string>nopkg</string>
+	<key>minimum_os_version</key>
+	<string>10.13.0</string>
+	<key>name</key>
+	<string>ps-startup_chime</string>
+	<key>preinstall_alert</key>
+	<dict>
+		<key>alert_detail</key>
+		<string>This will enable the Startup Chime for Macs from 2016 on with T1 and T2 chips. The chime will ring on the next reboot. Otherwise, click Cancel to exit.</string>
+		<key>alert_title</key>
+		<string>Startup Chime</string>
+		<key>cancel_label</key>
+		<string>Cancel</string>
+		<key>ok_label</key>
+		<string>OK</string>
+	</dict>
+	<key>preinstall_script</key>
+	<string>#!/bin/bash
+nvram StartupMute=%00
+</string>
+	<key>version</key>
+	<string>1.0</string>
+</dict>
+</plist>
