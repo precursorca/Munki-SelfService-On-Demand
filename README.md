@@ -1,7 +1,7 @@
 # Munki-SelfService-On-Demand
 
-> v. 1.0.12  
-> February 23, 2020  
+> v. 1.0.13  
+> February 26, 2020  
 > Alex Narvey / Precursor.ca  
 
 ![Self Service Screenshot](SelfServices_ScreenShot.png)
@@ -34,7 +34,7 @@ Initiates an update of all installed Creative Cloud apps so that Standard Users 
 
 ### PS-clean_var_folders
 This utility will clear the contents of the folder /private/var/folders which caches various things that may become corrupt and - among other things - prevent an app from launching. 
-This is “big medecine” and should only be undertaken under the advisement of your system adminstrator. After performing this function you should then choose "Restart" from the Apple menu to start up the computer. It will automatically rebuild anything it needs in /private/var/folders.
+This is “big medicine” and should only be undertaken under the advisement of your system administrator. After performing this function you should then choose "Restart" from the Apple menu to start up the computer. It will automatically rebuild anything it needs in /private/var/folders.
 10.9.5 or higher
 
 ### PS-dns_flush_cache
@@ -73,7 +73,7 @@ Resets launch services to help with problems in window display and open with per
 10.9.5 or higher.
 
 ### PS-library_invisible
-Makes the ~/Library invisibile again - if a user has made it visible and wants to return it to its natural state.
+Makes the ~/Library invisible again - if a user has made it visible and wants to return it to its natural state.
 10.9.5 or higher.
 
 ### PS-library_visible
@@ -84,13 +84,17 @@ Makes the normally invisible ~/Library folder visible and opens it in the Finder
 Gathers all System and Install logs and places an archive into the user's downloads folder.
 10.9.5 or higher.
 
+### PS-lpadmin
+Adds standard user to lpadmin group to allow for administration of print queues.
+10.12.6 or higher.
+
 ### PS-mail_optimizer
 Vacuums the Mail app database to make it more efficient.
 10.9.5 or higher.
 
 ### PS-mail_rebuilder
 Deletes the Mail app Envelope and causes Mail to resync with the server and pull down all the messages again. Can take a long time depending on amount of mail and internet speed.
-10.9.5 or higher.
+10.12.6 or higher.
 
 ### PS-malware_scan
 Initiates a malware scan utilizing Malwarebytes for Mac 3.0 or higher provided it is properly installed and access privileges are granted - see included document "Munki and osascript Notes"
@@ -101,7 +105,7 @@ Runs the "purge" command to free up memory without requiring a restart. It may a
 10.9.5 or higher.
 
 ### PS-speedtest
-Test your internet speeed (upload and download) using speedtest.cli and pops up the results in a Safari window. Flash is NOT required.
+Test your internet speed (upload and download) using speedtest.cli and pops up the results in a Safari window. Flash is NOT required.
 10.9.5 or higher.
 
 ### PS-spotlight_rebuilder
@@ -135,7 +139,7 @@ Lets a standard user view the System log with the /Applications/Utilities/Consol
 * April 5, 2017 Version 1.0.10 Added PS-enable_ard to enable the Apple Remote Desktop client (more info at http://scriptingosx.com/2016/01/control-apple-remote-desktop-access-with-munki/).
 * October 16, 2017 Version 1.0.11 Added PS-malware_scan to initiate a Malwarebytes for Mac 3.0 scan. (May require some other manipulations. See included "Munki and osascript Notes").
 * February 23, 2020 Version 1.0.12 Added PS-startup_chime to enable the missing Startup Chime on Macs from 2016 on with T1 or T2 chips.
-
+* February 26, 2020 Version 1.0.13 Added PS-lpadmin to put standard users into lpadmin print group to allow for administration of print queues. Updated PS-Mail_Rebuilder and PS Mail_Optimizer to work for Sierra up to Catalina
 
 ## Contributors
 * Alex Narvey

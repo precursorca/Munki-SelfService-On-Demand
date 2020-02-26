@@ -9,11 +9,11 @@
 		<key>created_by</key>
 		<string>precursor.ca</string>
 		<key>creation_date</key>
-		<date>2016-03-02T15:51:19Z</date>
+		<date>2020-02-26T15:51:19Z</date>
 		<key>munki_version</key>
-		<string>2.5.1.2627</string>
+		<string>4.1.0</string>
 		<key>os_version</key>
-		<string>10.11.3</string>
+		<string>10.15.3</string>
 	</dict>
 	<key>autoremove</key>
 	<false/>
@@ -24,7 +24,7 @@
 	<key>category</key>
 	<string>SelfService</string>
 	<key>description</key>
-	<string>This utility will rebuild your Apple Mail app's envelope database from scratch. This can take time. Use it when you Mail is missing items or appears to be corrupted. If Mail is just slow you might want to try the PS-Mail_Optimizer instaed.</string>
+	<string>This utility will rebuild your Apple Mail app's envelope database from scratch. This can take time. Use it when you Mail is missing items or appears to be corrupted. If Mail is just slow you might want to try the PS-Mail_Optimizer instead.</string>
 	<key>developer</key>
 	<string>Precursor Systems</string>
 	<key>display_name</key>
@@ -34,7 +34,7 @@
 	<key>installer_type</key>
 	<string>nopkg</string>
 	<key>minimum_os_version</key>
-	<string>10.9.5</string>
+	<string>10.12.6</string>
 	<key>name</key>
 	<string>ps-mail_rebuilder</string>
 	<key>preinstall_alert</key>
@@ -68,13 +68,17 @@ if [[ -n $AppRunning ]]; then
 fi
 
 # Check for macOS version
-if [[ $os = 10.12* ]]; then
-	mailversion="V4"
+if [[ $os = 10.15* ]]; then
+	mailversion="V7"
 else 
- if [[ $os = 10.11* ]]; then
-	mailversion="V3"
- else
-	mailversion="V2"
+ if [[ $os = 10.14* ]]; then
+	mailversion="V6"
+ else 
+  if [[ $os = 10.13* ]]; then
+	mailversion="V5"
+  else
+	mailversion="V4"
+  fi
  fi
 fi
 
