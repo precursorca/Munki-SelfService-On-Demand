@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
+<plist version="1.0.1">
 <dict>
 	<key>OnDemand</key>
 	<true/>
@@ -36,7 +36,7 @@
 	<dict>
 		<key>alert_detail</key>
 		<string>Let a standard user restart to Recovery or Diagnostic mode based on the Rich Trouton (Der Flounder) script.
-<https://derflounder.wordpress.com/2020/03/28/booting-to-macos-recovery-or-diagnostics-via-jamf-pros-self-service/#more-10856>
+
 Click OK to continue, or click Cancel to exit.</string>
 		<key>alert_title</key>
 		<string>PS Recovery-Diagnostic Reboot</string>

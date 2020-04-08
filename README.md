@@ -1,6 +1,6 @@
 # Munki-SelfService-On-Demand
 
-> v. 1.0.14  
+> v. 1.0.15  
 > April 8, 2020  
 > Alex Narvey / Precursor.ca  
 
@@ -146,6 +146,7 @@ Lets a standard user view the System log with the /Applications/Utilities/Consol
 * February 23, 2020 Version 1.0.12 Added PS-startup_chime to enable the missing Startup Chime on Macs from 2016 on with T1 or T2 chips.
 * February 26, 2020 Version 1.0.13 Added PS-lpadmin to put standard users into lpadmin print group to allow for administration of print queues. Updated PS-Mail_Rebuilder and PS Mail_Optimizer to work for Sierra up to Catalina
 * April 8, 2020 Version 1.0.14 Added PS-Recovery_Diagnostic_Reboot based on Rich Trouton's (Der Flouder's) script.
+* April 8, 2020 Version 1.0.15 Removed the DerFlounder url from inside the PS-Recovery_Diagnostic_Reboot.plist to avoid errors.
 
 ## Contributors
 * Alex Narvey
