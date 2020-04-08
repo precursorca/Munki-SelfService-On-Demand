@@ -1,7 +1,7 @@
 # Munki-SelfService-On-Demand
 
-> v. 1.0.13  
-> February 26, 2020  
+> v. 1.0.14  
+> April 8, 2020  
 > Alex Narvey / Precursor.ca  
 
 ![Self Service Screenshot](SelfServices_ScreenShot.png)
@@ -108,6 +108,11 @@ Runs the "purge" command to free up memory without requiring a restart. It may a
 Test your internet speed (upload and download) using speedtest.cli and pops up the results in a Safari window. Flash is NOT required.
 10.9.5 or higher.
 
+### PS-recovery_diagnstic_reboot
+Lets a standard user reboot to Recovery mode or Hardware Diagnostic mode based on Rich Trouton's script for Jamf pro.
+https://derflounder.wordpress.com/2020/03/28/booting-to-macos-recovery-or-diagnostics-via-jamf-pros-self-service/#more-10856
+10.12.0 or higher.
+
 ### PS-spotlight_rebuilder
 Deletes the Spotlight index (for both internal and external disks). Performance WILL be impacted during the rebuild.
 10.9.5 or higher.
@@ -140,6 +145,7 @@ Lets a standard user view the System log with the /Applications/Utilities/Consol
 * October 16, 2017 Version 1.0.11 Added PS-malware_scan to initiate a Malwarebytes for Mac 3.0 scan. (May require some other manipulations. See included "Munki and osascript Notes").
 * February 23, 2020 Version 1.0.12 Added PS-startup_chime to enable the missing Startup Chime on Macs from 2016 on with T1 or T2 chips.
 * February 26, 2020 Version 1.0.13 Added PS-lpadmin to put standard users into lpadmin print group to allow for administration of print queues. Updated PS-Mail_Rebuilder and PS Mail_Optimizer to work for Sierra up to Catalina
+* April 8, 2020 Version 1.0.14 Added PS-Recovery_Diagnostic_Reboot based on Rich Trouton's (Der Flouder's) script.
 
 ## Contributors
 * Alex Narvey
