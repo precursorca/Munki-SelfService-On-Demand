@@ -29,7 +29,7 @@ I used Munki Admin for this.
 ## The Utilities
 
 ### PS-accessibility_preferences
-Opens the System Preferences Accessibility pane (A.K.A. Universal Access) which Dr. Emily Kausalik suggested adding to all self-service portals in her MacSysAdmin 2021 presentation entitled "Inclusive Design for Mac Admins". (I used the icon from /System/Library/PreferencePanes/UniversalAccessPref.prefPane/Contents/Resources/UniversalAccessPref.icns)
+Opens the System Preferences Accessibility pane (A.K.A. Universal Access) which Dr. Emily Kausalik-Whittle suggested adding to all self-service portals in her MacSysAdmin 2021 presentation entitled "Inclusive Design for Mac Admins". (I used the icon from /System/Library/PreferencePanes/UniversalAccessPref.prefPane/Contents/Resources/UniversalAccessPref.icns)
 10.14.6 or higher
 
 ### PS-cc_updater
