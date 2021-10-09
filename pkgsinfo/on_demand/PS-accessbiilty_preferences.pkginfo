@@ -25,7 +25,7 @@
 	<key>category</key>
 	<string>SelfService</string>
 	<key>description</key>
-	<string>This utility will open the System Preferences Accessibility pane (AKA Universal Access) which Dr. Emily Kausalik suggested adding to all self-service portals in her MacSysAdmin 2021 presentation entitled "Inclusive Design for Mac Admins".</string>
+	<string>This utility will open the System Preferences Accessibility pane (AKA Universal Access) which Dr. Emily Kausalik-Whittle suggested adding to all self-service portals in her MacSysAdmin 2021 presentation entitled "Inclusive Design for Mac Admins".</string>
 	<key>developer</key>
 	<string>Precursor Systems</string>
 	<key>display_name</key>
@@ -43,7 +43,7 @@
 	<key>postinstall_script</key>
 	<string>#!/bin/zsh
 #Open the Accessibility System Prefences Pane
-#Suggested by Dr. Emily Kausaliuk in her MacSysAdmin 2021 presentation "Inclusive Design for Mac Admins"
+#Suggested by Dr. Emily Kausaliuk-Whittle in her MacSysAdmin 2021 presentation "Inclusive Design for Mac Admins"
 #https://www.loom.com/share/9a395c1f1ebe424487c4bd4d77eb1b00
 Open x-apple.systempreferences:com.apple.preference.universalaccess
 exit 0
