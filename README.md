@@ -1,7 +1,7 @@
 # Munki-SelfService-On-Demand
 
-> v. 1.0.15  
-> April 8, 2020  
+> v. 1.0.16  
+> October 9, 2021  
 > Alex Narvey / Precursor.ca  
 
 ![Self Service Screenshot](SelfServices_ScreenShot.png)
@@ -27,6 +27,10 @@ I used Munki Admin for this.
 
 
 ## The Utilities
+
+### PS-accessibility_preferences
+Opens the System Preferences Accessibility pane (A.K.A. Universal Access) which Dr. Emily Kausalik suggested adding to all self-service portals in her MacSysAdmin 2021 presentation entitled "Inclusive Design for Mac Admins". (I used the icon from /System/Library/PreferencePanes/UniversalAccessPref.prefPane/Contents/Resources/UniversalAccessPref.icns)
+10.14.6 or higher
 
 ### PS-cc_updater
 Initiates an update of all installed Creative Cloud apps so that Standard Users can update their Creative Cloud. Requires that an Admin has already packaged and installed a RemoteUpdateManager enabled version of Creative Cloud Desktop App using the Adobe Creative Cloud Packager.
@@ -147,6 +151,7 @@ Lets a standard user view the System log with the /Applications/Utilities/Consol
 * February 26, 2020 Version 1.0.13 Added PS-lpadmin to put standard users into lpadmin print group to allow for administration of print queues. Updated PS-Mail_Rebuilder and PS Mail_Optimizer to work for Sierra up to Catalina
 * April 8, 2020 Version 1.0.14 Added PS-Recovery_Diagnostic_Reboot based on Rich Trouton's (Der Flouder's) script.
 * April 8, 2020 Version 1.0.15 Removed the DerFlounder url from inside the PS-Recovery_Diagnostic_Reboot.plist to avoid errors.
+* October 9, 2021 Version 1.0.16 Added Accessibility Preferences utility as suggested by Dr. Emily Kausalik in her MacSysAdmin 2021 presentation "Inclusive Design for Mac Admins".
 
 ## Contributors
 * Alex Narvey
