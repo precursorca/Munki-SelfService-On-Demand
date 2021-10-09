@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>OnDemand</key>
+	<true/>
+	<key>_metadata</key>
+	<dict>
+		<key>created_by</key>
+		<string>pi</string>
+		<key>creation_date</key>
+		<date>2021-10-09T19:11:17Z</date>
+		<key>munki_version</key>
+		<string>5.5.1</string>
+		<key>os_version</key>
+		<string>11.6</string>
+	</dict>
+	<key>autoremove</key>
+	<false/>
+	<key>catalogs</key>
+	<array>
+		<string>testing</string>
+		<string>production</string>
+	</array>
+	<key>category</key>
+	<string>SelfService</string>
+	<key>description</key>
+	<string>This utility will open the System Preferences Accessibility pane (AKA Universal Access) which Dr. Emily Kausalik suggested adding to all self-service portals in her MacSysAdmin 2021 presentation entitled "Inclusive Design for Mac Admins".</string>
+	<key>developer</key>
+	<string>Precursor Systems</string>
+	<key>display_name</key>
+	<string>Accessibility Preferences</string>
+	<key>icon_name</key>
+	<string>Accessibility.png</string>
+	<key>installcheck_script</key>
+	<string></string>
+	<key>installer_type</key>
+	<string>nopkg</string>
+	<key>minimum_os_version</key>
+	<string>10.4.0</string>
+	<key>name</key>
+	<string>Accessibility Preferences</string>
+	<key>postinstall_script</key>
+	<string>#!/bin/zsh
+#Open the Accessibility System Prefences Pane
+#Suggested by Dr. Emily Kausaliuk in her MacSysAdmin 2021 presentation "Inclusive Design for Mac Admins"
+#https://www.loom.com/share/9a395c1f1ebe424487c4bd4d77eb1b00
+Open x-apple.systempreferences:com.apple.preference.universalaccess
+exit 0
+</string>
+	<key>unattended_install</key>
+	<true/>
+	<key>version</key>
+	<string>1.0.0</string>
+</dict>
+</plist>
