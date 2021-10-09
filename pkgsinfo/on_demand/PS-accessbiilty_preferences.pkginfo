@@ -43,7 +43,7 @@
 	<key>postinstall_script</key>
 	<string>#!/bin/zsh
 #Open the Accessibility System Prefences Pane
-#Suggested by Dr. Emily Kausaliuk-Whittle in her MacSysAdmin 2021 presentation "Inclusive Design for Mac Admins"
+#Suggested by Dr. Emily Kausalik-Whittle in her MacSysAdmin 2021 presentation "Inclusive Design for Mac Admins"
 #https://www.loom.com/share/9a395c1f1ebe424487c4bd4d77eb1b00
 Open x-apple.systempreferences:com.apple.preference.universalaccess
 exit 0
