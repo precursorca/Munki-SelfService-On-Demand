@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
+<plist version="1.0.1">
 <dict>
 	<key>OnDemand</key>
 	<true/>
@@ -50,7 +50,7 @@
 	</dict>
 	<key>preinstall_script</key>
 	<string>#!/bin/sh
-sudo /usr/bin/atsutil databases -removeUser</string>
+/usr/bin/atsutil databases -removeUser</string>
 	<key>version</key>
 	<string>1.0</string>
 </dict>
