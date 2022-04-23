@@ -114,7 +114,7 @@ https://derflounder.wordpress.com/2020/03/28/booting-to-macos-recovery-or-diagno
 10.12.0 or higher.
 
 ### PS-speedtest
-Test your internet speed (upload and download simultaneously) using Apple's Network Quality test. Adapted from a script by Brock Walter posted to Jamf Nation Community: https://community.jamf.com/t5/jamf-pro/the-networkquality-is-not-strained/m-p/254301#M236109
+Test your internet speed (upload and download simultaneously) using Apple's Network Quality test. Adapted from a script by Brock Walter posted to Jamf Nation Community: https://community.jamf.com/t5/jamf-pro/the-networkquality-is-not-strained/m-p/254301#M236109.
 12.0 or higher.
 
 ### PS-spotlight_rebuilder
