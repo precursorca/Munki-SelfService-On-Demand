@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>OnDemand</key>
+	<true/>
+	<key>_metadata</key>
+	<dict>
+		<key>created_by</key>
+		<string>pi</string>
+		<key>creation_date</key>
+		<date>2022-04-23T15:51:19Z</date>
+		<key>munki_version</key>
+		<string>5.6.4</string>
+		<key>os_version</key>
+		<string>12.3.1</string>
+	</dict>
+	<key>autoremove</key>
+	<false/>
+	<key>catalogs</key>
+	<array>
+		<string>testing</string>
+	</array>
+	<key>category</key>
+	<string>SelfService</string>
+	<key>description</key>
+	<string>This will use the macOS Network Quality test to assess your internet speed (both upload and download simultaneously). It is based on a script Brock Walters shared in Jamf Nation.</string>
+	<key>developer</key>
+	<string>Precursor Systems</string>
+	<key>display_name</key>
+	<string>PS Speed Test</string>
+	<key>icon_name</key>
+	<string>PS-speedtest.png</string>
+	<key>installer_type</key>
+	<string>nopkg</string>
+	<key>minimum_os_version</key>
+	<string>12.0</string>
+	<key>name</key>
+	<string>ps-speed-test</string>
+	<key>preinstall_alert</key>
+	<dict>
+		<key>alert_detail</key>
+		<string>This will use the macOS Network Quality test to assess your internet speed (both upload and download simultaneously). Click OK to use the utility. Otherwise, click Cancel to exit.</string>
+		<key>alert_title</key>
+		<string>Speed Test</string>
+		<key>cancel_label</key>
+		<string>Cancel</string>
+		<key>ok_label</key>
+		<string>OK</string>
+	</dict>
+	<key>preinstall_script</key>
+	<string>#!/bin/zsh
+#Adapted from Brock Walters post in the Jamf Nation Community:
+#https://community.jamf.com/t5/jamf-pro/the-networkquality-is-not-strained/m-p/254301#M236109
+filpth='/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources'
+icnsnm='GenericNetworkIcon'
+#tsttyp=$(/usr/bin/osascript -e "Please choose a Network Quality test from the list {\"Download + Upload Speed\", \"Video Conferencing\"} with title \"Network Quality Test\" with prompt \"Please select test type to begin:\"")
+#case "$tsttyp" in
+#				  'false' ) exit ;;
+#'Download + Upload Speed' ) icnsnm='GenericNetworkIcon'
+#							option='-sv' ;;
+#	 'Video Conferencing' ) icnsnm='GroupIcon'
+#							option='-v' ;;
+#esac
+
+/usr/bin/osascript -e "display dialog \"Test in progress...\n\" buttons {\"Cancel\"} with icon POSIX file \"$filpth/$icnsnm.icns\" with Title \"Network Quality Test - $tsttyp\"" &amp;
+prgpid=$!
+
+/usr/bin/networkquality -sv | /usr/bin/sed '/SUMMARY/d' &gt; /private/tmp/summary.txt &amp;
+while true
+do
+	if [ -n "$(/bin/cat /private/tmp/summary.txt)" ]
+	then
+		break
+	fi
+	if /bin/kill -s 0 "$prgpid"
+	then
+		&gt;&amp;2 echo "waiting for networkquality..."
+		/bin/sleep 3
+	else
+		exit
+	fi
+done
+
+&gt;&amp;2 echo "$(/bin/cat /private/tmp/summary.txt)"
+/usr/bin/osascript -e "display dialog \"$(/bin/cat /private/tmp/summary.txt)\" buttons {\"Ok\"} default button 1 with icon POSIX file \"$filpth/$icnsnm.icns\" with Title \"Network Quality Test - $tsttyp\""
+/bin/rm -rf /private/tmp/summary.txt 
+/bin/kill -9 "$prgpid"
+</string>
+	<key>version</key>
+	<string>2.0.1</string>
+</dict>
+</plist>
+
