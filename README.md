@@ -108,14 +108,14 @@ Initiates a malware scan utilizing Malwarebytes for Mac 3.0 or higher provided i
 Runs the "purge" command to free up memory without requiring a restart. It may aid in performance. Modern versions of macOS are quite good at managing memory on their own so this command may only result in the cached files being cleaned out.
 10.9.5 or higher.
 
-### PS-speedtest
-Test your internet speed (upload and download) using speedtest.cli and pops up the results in a Safari window. Flash is NOT required.
-10.9.5 or higher.
-
 ### PS-recovery_diagnstic_reboot
 Lets a standard user reboot to Recovery mode or Hardware Diagnostic mode based on Rich Trouton's script for Jamf pro.
 https://derflounder.wordpress.com/2020/03/28/booting-to-macos-recovery-or-diagnostics-via-jamf-pros-self-service/#more-10856
 10.12.0 or higher.
+
+### PS-speedtest
+Test your internet speed (upload and download simultaneously) using Apple's Network Quality test. Adapted from a script by Brock Walter posted to Jamf Nation Community: https://community.jamf.com/t5/jamf-pro/the-networkquality-is-not-strained/m-p/254301#M236109
+12.0 or higher.
 
 ### PS-spotlight_rebuilder
 Deletes the Spotlight index (for both internal and external disks). Performance WILL be impacted during the rebuild.
