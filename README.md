@@ -1,7 +1,7 @@
 # Munki-SelfService-On-Demand
 
-> v. 1.0.17  
-> October 11, 2021  
+> v. 1.0.18  
+> April 23, 2022  
 > Alex Narvey / Precursor.ca  
 
 ![Self Service Screenshot](SelfServices_ScreenShot.png)
@@ -153,6 +153,7 @@ Lets a standard user view the System log with the /Applications/Utilities/Consol
 * April 8, 2020 Version 1.0.15 Removed the DerFlounder url from inside the PS-Recovery_Diagnostic_Reboot.plist to avoid errors.
 * October 9, 2021 Version 1.0.16 Added Accessibility Preferences utility as suggested by Dr. Emily Kausalik in her MacSysAdmin 2021 presentation "Inclusive Design for Mac Admins".
 * October 11, 2021 Version 1.0.17 Removed the redundant sudo command in the spotlight and user-font-cache scripts.
+* April 23, 2022 Version 1.0.18 SpeedTest 2.0.1 now utilizes Apple's Network Quality testing requiring macOS 12.0 or higher (adapted from a script by Brock Walters posted on Jamf Nation Community https://community.jamf.com/t5/jamf-pro/the-networkquality-is-not-strained/m-p/254301#M236109.
 
 ## Contributors
 * Alex Narvey
