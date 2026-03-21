@@ -94,11 +94,11 @@ Adds standard user to lpadmin group to allow for administration of print queues.
 
 ### PS-mail_optimizer
 Vacuums the Mail app database to make it more efficient.
-10.9.5 or higher.
+macOS 26 compatible.
 
 ### PS-mail_rebuilder
 Deletes the Mail app Envelope and causes Mail to resync with the server and pull down all the messages again. Can take a long time depending on amount of mail and internet speed.
-10.12.6 or higher.
+macOS 26 compatible. (requires Managed Software Update have Full Disk Access. see: https://github.com/munki/munki/wiki/PPPC-Privacy-permissions#munki-7)
 
 ### PS-malware_scan
 Initiates a malware scan utilizing Malwarebytes for Mac 3.0 or higher provided it is properly installed and access privileges are granted - see included document "Munki and osascript Notes"
