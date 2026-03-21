@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>OnDemand</key>
+	<true/>
+	<key>_metadata</key>
+	<dict>
+		<key>created_by</key>
+		<string>precursor.ca</string>
+		<key>creation_date</key>
+		<date>2026-03-21T15:51:20Z</date>
+		<key>munki_version</key>
+		<string>7.0.10</string>
+		<key>os_version</key>
+		<string>26.3.1</string>
+	</dict>
+	<key>autoremove</key>
+	<false/>
+	<key>catalogs</key>
+	<array>
+		<string>testing</string>
+	</array>
+	<key>category</key>
+	<string>SelfService</string>
+	<key>description</key>
+	<string>This utility will rebuild your Apple Mail app's envelope database from scratch. This can take time. Use it when you Mail is missing items or appears to be corrupted. If Mail is just slow you might want to try the PS-Mail_Optimizer instaed.</string>
+	<key>developer</key>
+	<string>Precursor Systems</string>
+	<key>display_name</key>
+	<string>PS Mail Rebuilder</string>
+	<key>icon_name</key>
+	<string>PS-mail_rebuild.png</string>
+	<key>installer_type</key>
+	<string>nopkg</string>
+	<key>minimum_os_version</key>
+	<string>14.0</string>
+	<key>name</key>
+	<string>ps-mail_rebuilder</string>
+	<key>preinstall_alert</key>
+	<dict>
+		<key>alert_detail</key>
+		<string>This will will Quit your Mail app and then rebuild your Apple Mail app's envelope database from scratch. Click "OK" to continue, or click "Cancel" to exit.</string>
+		<key>alert_title</key>
+		<string>Mail Optimizer</string>
+		<key>cancel_label</key>
+		<string>Cancel</string>
+		<key>ok_label</key>
+		<string>OK</string>
+	</dict>
+	<key>preinstall_script</key>
+	<string>#!/bin/bash
+# Reset Apple Mail Index files so Mail will re-index
+# Converted from AppleScript by Alex Narvey / Precursor Systems
+# For use as a Munki on-demand install script
+
+# Get the current logged-in user
+CURRENT_USER=$(stat -f "%Su" /dev/console)
+USER_HOME=$(dscl . -read /Users/"$CURRENT_USER" NFSHomeDirectory | awk '{print $2}')
+
+# Notify user
+osascript -e 'display dialog "Apple Mail will be quit and the index reset process will run. This may take a minute or two. Please be patient and wait for the next dialog box." buttons {"OK"} default button "OK"'
+
+# Quit Mail if running
+if pgrep -x "Mail" > /dev/null; then
+    osascript -e 'tell application "Mail" to quit'
+    sleep 5
+    # Force kill if still running after grace period
+    if pgrep -x "Mail" > /dev/null; then
+        pkill -x "Mail"
+        sleep 3
+    fi
+fi
+
+# Path to MailData folder (V10 = macOS 13+)
+MAIL_DATA="$USER_HOME/Library/Mail/V10/MailData"
+
+if [ ! -d "$MAIL_DATA" ]; then
+    osascript -e 'display dialog "Could not locate the Mail data folder. Aborting." buttons {"OK"} default button "OK"'
+    exit 1
+fi
+
+# Create timestamped backup folder on user's Desktop
+TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
+BACKUP_FOLDER="$USER_HOME/Desktop/Mail_Index_Backup-$TIMESTAMP"
+mkdir -p "$BACKUP_FOLDER"
+chown "$CURRENT_USER" "$BACKUP_FOLDER"
+
+# Move index files to backup folder using find to handle spaces correctly
+/bin/mv $MAIL_DATA/Envelope\ Index "$BACKUP_FOLDER/Envelope\ Index"
+/bin/mv $MAIL_DATA/Envelope\ Index-shm "$BACKUP_FOLDER/Envelope\ Index-shm"
+/bin/mv $MAIL_DATA/Envelope\ Index-wal "$BACKUP_FOLDER/Envelope\ Index-wal"
+
+
+# Notify user
+osascript -e "display dialog \"Your Mail index has been reset. A backup of the files has been saved to your Desktop in 'Mail Index Backup $TIMESTAMP'.\" buttons {\"OK\"} default button \"OK\""
+osascript -e 'display dialog "When you next launch Apple Mail you may be asked to import messages into Apple Mail. This is normal — please agree to rebuild the index." buttons {"OK"} default button "OK"'
+
+# Relaunch Mail as the current user
+/bin/launchctl asuser "$(id -u "$CURRENT_USER")" /usr/bin/open -a Mail
+
+exit 0</string>
+	<key>version</key>
+	<string>1.1.9</string>
+</dict>
+</plist>
