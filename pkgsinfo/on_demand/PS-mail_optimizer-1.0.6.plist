@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>OnDemand</key>
+	<true/>
+	<key>_metadata</key>
+	<dict>
+		<key>created_by</key>
+		<string>precursor.ca</string>
+		<key>creation_date</key>
+		<date>2026-03-21T15:51:19Z</date>
+		<key>munki_version</key>
+		<string>7.0.10</string>
+		<key>os_version</key>
+		<string>26.3.1</string>
+	</dict>
+	<key>autoremove</key>
+	<false/>
+	<key>catalogs</key>
+	<array>
+		<string>testing</string>
+	</array>
+	<key>category</key>
+	<string>SelfService</string>
+	<key>description</key>
+	<string>This utility will optimize your Apple Mail app's sqlite3 envelope database to help Mail operate more efficiently. It is based on the bash script by Paul Galow https://github.com/pbihq/tools which inspired by Brett Terpstra's post http://brettterpstra.com/2015/10/27/vacuuming-mail-dot-app-on-el-capitan/</string>
+	<key>developer</key>
+	<string>Precursor Systems</string>
+	<key>display_name</key>
+	<string>PS Mail Optimizer</string>
+	<key>icon_name</key>
+	<string>PS-mail_optimize.png</string>
+	<key>installer_type</key>
+	<string>nopkg</string>
+	<key>minimum_os_version</key>
+	<string>14</string>
+	<key>name</key>
+	<string>ps-mail_optimizer</string>
+	<key>preinstall_alert</key>
+	<dict>
+		<key>alert_detail</key>
+		<string>This will will Quit your Mail app and then optimize its sqlite3 envelope database . Click "OK" to continue, or click "Cancel" to exit.</string>
+		<key>alert_title</key>
+		<string>Mail Optimizer</string>
+		<key>cancel_label</key>
+		<string>Cancel</string>
+		<key>ok_label</key>
+		<string>OK</string>
+	</dict>
+	<key>preinstall_script</key>
+	<string>#!/bin/bash
+# Optimize Apple Mail database (Envelope Index vacuum)
+# Converted from AppleScript by Alex Narvey / Precursor Systems
+# For use as a Munki on-demand install script
+
+# Get the current logged-in user
+CURRENT_USER=$(stat -f "%Su" /dev/console)
+USER_HOME=$(dscl . -read /Users/"$CURRENT_USER" NFSHomeDirectory | awk '{print $2}')
+
+# Notify user
+osascript -e 'display dialog "Apple Mail will be quit and an optimization process will occur which will take a minute or two. Please be patient and wait for the next dialog box." buttons {"OK"} default button "OK"'
+
+# Quit Mail if running
+if pgrep -x "Mail" > /dev/null; then
+    osascript -e 'tell application "Mail" to quit'
+    sleep 5
+fi
+
+# Path to Mail Envelope Index (V10 = macOS 13+)
+DB_PATH="$USER_HOME/Library/Mail/V10/MailData/Envelope Index"
+
+if [ ! -f "$DB_PATH" ]; then
+    osascript -e 'display dialog "Could not locate the Mail Envelope Index. Aborting." buttons {"OK"} default button "OK"'
+    exit 1
+fi
+
+# Get size before vacuum
+SIZE_BEFORE=$(stat -f%z "$DB_PATH")
+
+# Vacuum the database
+/usr/bin/sqlite3 "$DB_PATH" 'VACUUM;'
+VACUUM_RESULT=$?
+
+#if [ $VACUUM_RESULT -ne 0 ]; then
+#    osascript -e 'display dialog "The optimization failed. The Mail database may be in use or corrupted." buttons {"OK"} default button "OK"'
+#    exit 1
+#fi
+
+# Get size after vacuum
+SIZE_AFTER=$(stat -f%z "$DB_PATH")
+
+# Convert to MB (rounded)
+SIZE_BEFORE_MB=$(echo "scale=0; $SIZE_BEFORE / 1000000" | bc)
+SIZE_AFTER_MB=$(echo "scale=0; $SIZE_AFTER / 1000000" | bc)
+
+# Notify user of results
+osascript -e "display dialog \"Mail index before: ${SIZE_BEFORE_MB} MB
+Mail index after: ${SIZE_AFTER_MB} MB
+
+Your index has been optimized and Apple Mail will now launch.\" buttons {\"OK\"} default button \"OK\""
+
+# Relaunch Mail as the current user
+/bin/launchctl asuser "$(id -u "$CURRENT_USER")" /usr/bin/open -a Mail
+
+exit 0</string>
+	<key>version</key>
+	<string>1.0.6</string>
+</dict>
+</plist>
