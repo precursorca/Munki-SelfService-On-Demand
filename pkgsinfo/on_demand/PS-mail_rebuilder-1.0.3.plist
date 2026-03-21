@@ -9,11 +9,11 @@
 		<key>created_by</key>
 		<string>precursor.ca</string>
 		<key>creation_date</key>
-		<date>2020-02-26T15:51:19Z</date>
+		<date>2026-03-21T15:51:20Z</date>
 		<key>munki_version</key>
-		<string>4.1.0</string>
+		<string>7.0.10</string>
 		<key>os_version</key>
-		<string>10.15.3</string>
+		<string>26.3.1</string>
 	</dict>
 	<key>autoremove</key>
 	<false/>
@@ -24,7 +24,7 @@
 	<key>category</key>
 	<string>SelfService</string>
 	<key>description</key>
-	<string>This utility will rebuild your Apple Mail app's envelope database from scratch. This can take time. Use it when you Mail is missing items or appears to be corrupted. If Mail is just slow you might want to try the PS-Mail_Optimizer instead.</string>
+	<string>This utility will rebuild your Apple Mail app's envelope database from scratch. This can take time. Use it when you Mail is missing items or appears to be corrupted. If Mail is just slow you might want to try the PS-Mail_Optimizer instaed.</string>
 	<key>developer</key>
 	<string>Precursor Systems</string>
 	<key>display_name</key>
@@ -34,7 +34,7 @@
 	<key>installer_type</key>
 	<string>nopkg</string>
 	<key>minimum_os_version</key>
-	<string>10.12.6</string>
+	<string>14.0</string>
 	<key>name</key>
 	<string>ps-mail_rebuilder</string>
 	<key>preinstall_alert</key>
@@ -50,63 +50,57 @@
 	</dict>
 	<key>preinstall_script</key>
 	<string>#!/bin/bash
+# Reset Apple Mail Index files so Mail will re-index
+# Converted from AppleScript by Alex Narvey / Precursor Systems
+# For use as a Munki on-demand install script
 
-# Apple Mail envelope rebuilding script
-# Parts based on the Bash Script of Paul Galow https://github.com/pbihq/tools
-# Which was based on the AppleScript by Brett Terpstra http://brettterpstra.com/2015/10/27/vacuuming-mail-dot-app-on-el-capitan/
-# Start script
-clear
-echo "Apple Mail Database rebuild started..."
+# Get the current logged-in user
+CURRENT_USER=$(stat -f "%Su" /dev/console)
+USER_HOME=$(dscl . -read /Users/"$CURRENT_USER" NFSHomeDirectory | awk '{print $2}')
 
-# Define variable(s)
-os=$(sw_vers -productVersion)
+# Notify user
+osascript -e 'display dialog "Apple Mail will be quit and the index reset process will run. This may take a minute or two. Please be patient and wait for the next dialog box." buttons {"OK"} default button "OK"'
 
-# Close Apple Mail
-AppRunning=$(pgrep Mail)
-if [[ -n $AppRunning ]]; then
-    osascript -e 'quit app "Mail"'
+# Quit Mail if running
+if pgrep -x "Mail" > /dev/null; then
+    osascript -e 'tell application "Mail" to quit'
+    sleep 5
+    # Force kill if still running after grace period
+    if pgrep -x "Mail" > /dev/null; then
+        pkill -x "Mail"
+        sleep 3
+    fi
 fi
 
-# Check for macOS version
-if [[ $os = 10.15* ]]; then
-	mailversion="V7"
-else 
- if [[ $os = 10.14* ]]; then
-	mailversion="V6"
- else 
-  if [[ $os = 10.13* ]]; then
-	mailversion="V5"
-  else
-	mailversion="V4"
-  fi
- fi
+# Path to MailData folder (V10 = macOS 13+)
+MAIL_DATA="$USER_HOME/Library/Mail/V10/MailData"
+
+if [ ! -d "$MAIL_DATA" ]; then
+    osascript -e 'display dialog "Could not locate the Mail data folder. Aborting." buttons {"OK"} default button "OK"'
+    exit 1
 fi
 
-#Get User Name
-userName=$(stat -f "%Su" /dev/console)
+# Create timestamped backup folder on user's Desktop
+TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
+BACKUP_FOLDER="$USER_HOME/Desktop/Mail_Index_Backup-$TIMESTAMP"
+mkdir -p "$BACKUP_FOLDER"
+chown "$CURRENT_USER" "$BACKUP_FOLDER"
 
-# Remove envelope db for resynchronization/rebuilding
-/bin/rm -rf /Users/$userName/Library/Mail/$mailversion/MailData/Envelope\ Index*  &amp;&gt; /private/tmp/MailRebuilding.log
-/bin/rm -rf /Users/$userName/Library/Mail/$mailversion/MailData/ExternalUpdates.storedata* &amp;&gt; /private/tmp/MailRebuilding.log
-error=$(cat /private/tmp/MailRebuilding.log)
+# Move index files to backup folder using find to handle spaces correctly
+/bin/mv $MAIL_DATA/Envelope\ Index "$BACKUP_FOLDER/Envelope\ Index"
+/bin/mv $MAIL_DATA/Envelope\ Index-shm "$BACKUP_FOLDER/Envelope\ Index-shm"
+/bin/mv $MAIL_DATA/Envelope\ Index-wal "$BACKUP_FOLDER/Envelope\ Index-wal"
 
-# Create success/error message
-if [[ -z $error ]]; then
-	error=0
-	echo "Done."
-else
-	echo $error
-fi
 
-# Set exit code
-if [[ "$error" -ne "0" ]]; then
-	logger "Apple Mail Database Rebuild failed."
-	exit 1
-else
-	logger "Apple Mail Database Rebuild finished."
-	exit 0
-fi</string>
+# Notify user
+osascript -e "display dialog \"Your Mail index has been reset. A backup of the files has been saved to your Desktop in 'Mail Index Backup $TIMESTAMP'.\" buttons {\"OK\"} default button \"OK\""
+osascript -e 'display dialog "When you next launch Apple Mail you may be asked to import messages into Apple Mail. This is normal — please agree to rebuild the index." buttons {"OK"} default button "OK"'
+
+# Relaunch Mail as the current user
+/bin/launchctl asuser "$(id -u "$CURRENT_USER")" /usr/bin/open -a Mail
+
+exit 0</string>
 	<key>version</key>
-	<string>1.0.2</string>
+	<string>1.1.9</string>
 </dict>
 </plist>
