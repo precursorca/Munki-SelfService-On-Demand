@@ -1,7 +1,7 @@
 # Munki-SelfService-On-Demand
 
-> v. 1.0.19 
-> March 21, 2025 
+> v. 1.0.20 
+> March 22, 2025 
 > Alex Narvey / Precursor.ca  
 
 ![Self Service Screenshot](SelfServices_ScreenShot.png)
@@ -42,9 +42,7 @@ This is “big medicine” and should only be undertaken under the advisement of
 10.9.5 or higher
 
 ### PS-dns_flush_cache
-Flushes the DNS cache on 10.10.4 and higher. 
-10.10.4 or higher
-It could work for 10.9.5 too but I did not build in the logic to discern the OS and provide the relevant alternative for 10.0.0 -> 10.0.3. (Maybe in version 2.0)
+Flushes the DNS cache. MacOS 26 Compatible.
 
 ### PS-eject_cd_dvd
 Ejects the media from the optical drive for older Macs and Macs with USB SuperDrives. For those times when the digital eject button is just not working.
@@ -64,8 +62,8 @@ Resets the permissions of the user's Home folder as per Apple Tech Note: https:/
 10.11 or higher
 
 ### PS-hello_world
-A harmless test for proof of concept. It throes up a dismissible dialog box box.
-10.9.5 or higher
+A harmless test for proof of concept. It makes the computer speak "Hello World" and displays a dismissible dialog box box with those words.
+macOS 26 Compatible.
 
 ### PS-iOS_screen_share
 It prompts the user to plug in their iOS device and then launches QuickTime and starts a Movie Recording to share the screen with a remote support session.
@@ -111,7 +109,8 @@ Runs the "purge" command to free up memory without requiring a restart. It may a
 ### PS-recovery_diagnstic_reboot
 Lets a standard user reboot to Recovery mode or Hardware Diagnostic mode based on Rich Trouton's script for Jamf pro.
 https://derflounder.wordpress.com/2020/03/28/booting-to-macos-recovery-or-diagnostics-via-jamf-pros-self-service/#more-10856
-10.12.0 or higher.
+As this technique does not work on Apple Silicon Macs the script will exit gracefully unless it is run on an Intel Mac.
+MacOS 26 compatible.
 
 ### PS-speedtest
 Test your internet speed (upload and download simultaneously) using Apple's Network Quality test. Adapted from a script by Brock Walter posted to Jamf Nation Community: https://community.jamf.com/t5/jamf-pro/the-networkquality-is-not-strained/m-p/254301#M236109.
@@ -156,6 +155,7 @@ Lets a standard user view the System log with the /Applications/Utilities/Consol
 * April 23, 2022 Version 1.0.18 SpeedTest 2.0.1 now utilizes Apple's Network Quality testing requiring macOS 12.0 or higher (adapted from a script by Brock Walters posted on Jamf Nation Community https://community.jamf.com/t5/jamf-pro/the-networkquality-is-not-strained/m-p/254301#M236109.
 * March 21, 2024 Version 1.0.19 PS-Mail_Rebuilder-1.1.9 and PS-Mail_Optimzer-1.0.6 now written for macOS 26 compatibility. PS-Mail_Rebuilder requires Full Disk Access. See
 https://github.com/munki/munki/wiki/PPPC-Privacy-permissions#munki-7
+* March 22, 2024 Version 1.0.20 PS-dns_flush_cache, PS-Hello_World, and PS-recovery_diagnostic_reboot now written for macOS 26 compatibility.
 
 ## Contributors
 * Alex Narvey
